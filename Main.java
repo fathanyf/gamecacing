@@ -133,7 +133,7 @@ class Game extends JPanel {
 
         if (status == GameStatus.NOT_STARTED) {
           drawCenteredString(g2d, "Cacing Kepanasan", FONT_L, 250);
-        //   drawCenteredString(g2d, "Kepanasan", FONT_M, 300);
+          drawCenteredString(g2d, "Kelompok 3", FONT_M, 300);
           drawCenteredString(g2d, "Tekan tombol apa saja", FONT_M_ITALIC, 330);
 
           return;
@@ -142,7 +142,7 @@ class Game extends JPanel {
         Point p = snake.getHead();
 
         g2d.drawString("Skor: " + String.format ("%02d", points), 20, 30);
-        g2d.drawString("Pengalaman Terbaik: " + String.format ("%02d", best), 230, 30);
+        g2d.drawString("Rekor Saat Ini : " + String.format ("%02d", best), 230, 30);
 
         if (cherry != null) {
           if (didLoadCherryImage) {
