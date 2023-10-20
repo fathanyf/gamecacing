@@ -25,7 +25,7 @@ class Game extends JPanel {
     private static int HEIGHT = 520;
     private static int DELAY = 50;
 
-    // Constructor
+    // Struktur Game
     public Game() {
         try {
             image = ImageIO.read(new File("cherry.png"));
@@ -35,7 +35,7 @@ class Game extends JPanel {
 
         addKeyListener(new KeyListener());
         setFocusable(true);
-        setBackground(new Color(130, 205, 71));
+        setBackground(new Color(155, 118, 83));
         setDoubleBuffered(true);
 
         snake = new Snake(WIDTH / 2, HEIGHT / 2);
@@ -52,7 +52,7 @@ class Game extends JPanel {
         Toolkit.getDefaultToolkit().sync();
     }
 
-    // Render the game
+    // Bentuk Game
     private void update() {
         snake.move();
 
@@ -97,7 +97,7 @@ class Game extends JPanel {
         setStatus(status == GameStatus.PAUSED ? GameStatus.RUNNING : GameStatus.PAUSED);
     }
 
-    // Check if the snake has hit the wall or itself
+    // Cacing ketabrak
     private void checkForGameOver() { 
         Point head = snake.getHead();
         boolean hitBoundary = head.getX() <= 20
@@ -116,7 +116,7 @@ class Game extends JPanel {
         }
     }
 
-    // Spawn a cherry at a random location
+    // Memunculkan Makanan Cacing
     public void drawCenteredString(Graphics g, String text, Font font, int y) { 
         FontMetrics metrics = g.getFontMetrics(font);
         int x = (WIDTH - metrics.stringWidth(text)) / 2;
@@ -132,17 +132,17 @@ class Game extends JPanel {
         g2d.setFont(FONT_M);
 
         if (status == GameStatus.NOT_STARTED) {
-          drawCenteredString(g2d, "Cacing Kepanasan", FONT_L, 250);
+          drawCenteredString(g2d, "Cacing Tanah", FONT_L, 250);
           drawCenteredString(g2d, "Kelompok 3", FONT_M, 300);
-          drawCenteredString(g2d, "Tekan tombol apa saja", FONT_M_ITALIC, 330);
+          drawCenteredString(g2d, "Tekan tombol apa saja untuk memulai", FONT_M_ITALIC, 330);
 
           return;
         }
 
         Point p = snake.getHead();
 
-        g2d.drawString("Skor: " + String.format ("%02d", points), 20, 30);
-        g2d.drawString("Rekor Saat Ini : " + String.format ("%02d", best), 230, 30);
+        g2d.drawString("Pencet P untuk Pause Skor: " + String.format ("%02d", points), 20, 30);
+        g2d.drawString("Rekor Terakhir : " + String.format ("%02d", best), 400, 30);
 
         if (cherry != null) {
           if (didLoadCherryImage) {
@@ -163,7 +163,7 @@ class Game extends JPanel {
             g2d.drawString("Paused", 600, 14);
         }
 
-        g2d.setColor(new Color(33, 70, 199));
+        g2d.setColor(new Color(251, 195, 167));
         g2d.fillRect(p.getX(), p.getY(), 10, 10);
 
         for(int i = 0, size = snake.getTail().size(); i < size; i++) {
@@ -177,13 +177,13 @@ class Game extends JPanel {
         g2d.drawRect(20, 40, WIDTH, HEIGHT);
     }
 
-    // spawn cherry in random position
+    // Memunculkan Makanan Cacing
     public void spawnCherry() {
         cherry = new Point((new Random()).nextInt(WIDTH - 60) + 20,
             (new Random()).nextInt(HEIGHT - 60) + 40);
     }
 
-    // game loop
+    // Tombol Kuncil Game
     private class KeyListener extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
@@ -226,7 +226,7 @@ enum GameStatus
     NOT_STARTED, RUNNING, PAUSED, GAME_OVER
 }
 
-// direction of snake
+// arah cacing
 enum Direction { 
     UP, DOWN, LEFT, RIGHT;
     
@@ -359,7 +359,7 @@ public class Main extends JFrame {
     private void initUI() {
         add(new Game());
 
-        setTitle("Cacing Kepanasan");
+        setTitle("Cacing Tanah");
         setSize(800, 610);
 
         setLocationRelativeTo(null);
